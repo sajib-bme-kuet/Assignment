@@ -16,14 +16,6 @@ const Modal = ({ open, onClose, title, children }) => {
           </p>
           <h2 className="modalTitle">{title}</h2>
           <div className="content">{children}</div>
-          {/* <div className="btnContainer">
-            <button className="btnPrimary">
-              <span className="bold">YES</span>, I love NFT's
-            </button>
-            <button className="btnOutline">
-              <span className="bold">NO</span>, thanks
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ const Tabs = ({ children }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   return (
-    <div>
+    <>
       <div>
         {children.map((child) => (
           <button
@@ -20,7 +20,7 @@ const Tabs = ({ children }) => {
           return child.props.children;
         })}
       </div>
-    </div>
+    </>
   );
 };
 export default Tabs;
