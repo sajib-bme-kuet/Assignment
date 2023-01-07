@@ -1,9 +1,11 @@
 import { useState } from "react";
 const Tabs = ({ children }) => {
-  const [activeTab, setActiveTab] = useState(children[0].props.label);
+  const [activeTab, setActiveTab] = useState();
+  // const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   return (
     <>
+      <div>{!activeTab && "Select a tab to begin with"}</div>
       <div>
         {children.map((child) => (
           <button

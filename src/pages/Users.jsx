@@ -5,6 +5,7 @@ import Tabs from "../components/tabs/Tabs";
 
 import { useState } from "react";
 import UserAddForm from "../components/forms/UserAddForm";
+import Table from "../components/table/Table";
 const Users = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -17,6 +18,10 @@ const Users = () => {
         <Tab label={"Employee"}>Employee</Tab>
         <Tab label={"Admin"}>Admin</Tab>
       </Tabs>
+      <Table
+        columns={[{ label: "ID", fieldName: "id" }]}
+        rows={[{ id: 1, name: "Sajib" }]}
+      />
     </>
   );
 };
