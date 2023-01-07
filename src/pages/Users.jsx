@@ -13,7 +13,7 @@ const Users = () => {
         <Tab label={"Employee"}>Employee</Tab>
         <Tab label={"Admin"}>Admin</Tab>
       </Tabs>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Add User">
         Hello
       </Modal>
     </>

@@ -1,25 +1,31 @@
 import "./modal.css";
-import { useState } from "react";
-const Modal = ({ children, open, onClose }) => {
-  const [isOpen, setIsOpen] = useState(open);
 
-  const handleClose = () => {
-    setIsOpen(false);
-    if (onClose) {
-      onClose();
-    }
-  };
-
+const Modal = ({ open, onClose, title, children }) => {
+  if (!open) return null;
   return (
-    <div>
-      {isOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button onClick={handleClose}>Close</button>
-            {children}
-          </div>
+    <div onClick={onClose} className="overlay">
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className="modalContainer"
+      >
+        <div className="modalRight">
+          <p className="closeBtn" onClick={onClose}>
+            X
+          </p>
+          <h2 className="modalTitle">{title}</h2>
+          <div className="content">{children}</div>
+          {/* <div className="btnContainer">
+            <button className="btnPrimary">
+              <span className="bold">YES</span>, I love NFT's
+            </button>
+            <button className="btnOutline">
+              <span className="bold">NO</span>, thanks
+            </button>
+          </div> */}
         </div>
-      )}
+      </div>
     </div>
   );
 };
