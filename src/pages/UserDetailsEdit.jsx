@@ -5,8 +5,8 @@ const UserDetailsEdit = () => {
   const userData = useSelector((state) => state.userDetails.data);
 
   return (
-    <div>
-      <h4> Edit User: </h4>
+    <div style={{ margin: "5rem" }}>
+      <h2 tyle={{ padding: "2rem" }}> Edit User: </h2>
       <UserDetailsForm
         initialFormValues={{
           first_name: userData.first_name,

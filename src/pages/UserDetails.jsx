@@ -18,21 +18,9 @@ const UserDetails = () => {
     setUserData(data);
   }, [data, id]);
   return (
-    <div>
-      {/* <Helmet>
-        <title>Details of {userData?.first_name}</title>
-        <meta
-          property="og:title"
-          content={`Details of {userData?.first_name}`}
-        />
-        <meta
-          property="og:image"
-          content={"https://api.unsplash.com/search/photos?page=1&query=man"}
-        />
-        <meta property="og:description" content={"Test"} />
-      </Helmet> */}
-      <h5>Details of {user_type}:</h5>
-      <table>
+    <div style={{ margin: "5rem" }}>
+      <h2 style={{ padding: "2rem" }}>Details of {user_type}:</h2>
+      <table style={{ textAlign: "left" }}>
         <tr>
           <td>ID</td>
           <td>{userData?.id}</td>
