@@ -1,40 +1,44 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Button from "../components/button/Button";
 
 const UserDetails = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { user_type, id } = useParams();
+  const userData = useSelector((state) => state.userDetails.data);
   return (
     <div>
-      <h5>Details of Employee:</h5>
+      <h5>Details of {user_type}:</h5>
       <table>
         <tr>
           <td>ID</td>
-          <td>value</td>
+          <td>{userData?.id}</td>
         </tr>
         <tr>
           <td>First Name</td>
-          <td>value</td>
+          <td>{userData?.first_name}</td>
         </tr>
         <tr>
           <td>Last Name</td>
-          <td>value</td>
+          <td>{userData?.last_name}</td>
         </tr>
         <tr>
           <td>Employee Type</td>
-          <td>value</td>
+          <td>{userData?.user_type}</td>
         </tr>
         <tr>
           <td>Division</td>
-          <td>value</td>
+          <td>{userData?.division}</td>
         </tr>
         <tr>
           <td>District</td>
-          <td>value</td>
+          <td>{userData?.district}</td>
         </tr>
       </table>
-      <Button onClick={() => navigate(`../edit/${id}`)}>Edit</Button>
+      <Button onClick={() => navigate(`../edit/${user_type}/${id}`)}>
+        Edit
+      </Button>
       <div>Share via</div>
     </div>
   );

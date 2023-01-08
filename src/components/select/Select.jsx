@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./select.css";
 
 function Select({ name, label, options, formik }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(formik.values[name]);
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {

@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "./userDetailsForm.css";
 import Select from "../select/Select";
+import { State, City } from "country-state-city";
 export default function UserDetailsForm({ initialFormValues }) {
   const validationSchema = yup.object({
     first_name: yup
@@ -33,6 +34,7 @@ export default function UserDetailsForm({ initialFormValues }) {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
   return (
     <div className="card">
       <div className="card-body">
@@ -74,8 +76,8 @@ export default function UserDetailsForm({ initialFormValues }) {
               type="radio"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              checked={formik.values.user_type === "employee"}
-              value="employee"
+              checked={formik.values.user_type === "Employee"}
+              value="Employee"
             />
             <label>Employee</label>
             <input
@@ -83,15 +85,15 @@ export default function UserDetailsForm({ initialFormValues }) {
               type="radio"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              checked={formik.values.user_type === "admin"}
-              value="admin"
+              checked={formik.values.user_type === "Admin"}
+              value="Admin"
             />
             <lable>Admin</lable>
             {formik.touched.user_type && formik.errors.user_type ? (
               <div>{formik.errors.user_type}</div>
             ) : null}
           </div>
-          {formik.values.user_type === "employee" ? (
+          {formik.values.user_type === "Employee" ? (
             <>
               <div className="form-row">
                 <label htmlFor="division">Divison</label>
