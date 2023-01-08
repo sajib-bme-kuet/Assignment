@@ -26,7 +26,7 @@ const Users = () => {
   const handleNextPage = () => {
     axios
       .get(
-        `${users}${activeTab?.toLowerCase()}&?page=${currentPage + 1}&limit=5`
+        `${users}${activeTab?.toLowerCase()}&page=${currentPage + 1}&limit=5`
       )
       .then((response) => {
         activeTab === "Employee"
@@ -42,7 +42,7 @@ const Users = () => {
     }
     axios
       .get(
-        `${users}${activeTab?.toLowerCase()}&?page=${currentPage - 1}&limit=5`
+        `${users}${activeTab?.toLowerCase()}&page=${currentPage - 1}&limit=5`
       )
       .then((response) => {
         activeTab === "Employee"
