@@ -1,9 +1,9 @@
-import { Field, Form, Formik } from "formik";
-import { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
 import * as yup from "yup";
-import Select from "../select/Select";
 import "./userDetailsForm.css";
-const UserDetailsForm = ({ initialFormValues }) => {
+import Select from "../select/Select";
+export default function UserDetailsForm({ initialFormValues }) {
   const validationSchema = yup.object({
     first_name: yup
       .string("Please enter User's First Name")
@@ -18,85 +18,110 @@ const UserDetailsForm = ({ initialFormValues }) => {
     district: yup.string("Please Choose User's District"),
   });
 
-  const [selectedDivision, setSelectedDivision] = useState();
-
+  const formik = useFormik({
+    initialValues: initialFormValues
+      ? initialFormValues
+      : {
+          first_name: "",
+          last_name: "",
+          user_type: "",
+          division: "",
+          district: "",
+        },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return (
     <div className="card">
-      <Formik
-        initialValues={
-          initialFormValues
-            ? initialFormValues
-            : {
-                first_name: "",
-                last_name: "",
-                user_type: "",
-                division: "",
-                district: "",
-              }
-        }
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          let payload = { ...values };
-          payload = { ...payload, division: selectedDivision };
-          alert(JSON.stringify(payload, null, 2));
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form className="form">
-            <div className="form-row">
-              <Field
-                className="form-control"
-                type="text"
-                name="first_name"
-                placeholder="First Name"
-              />
-              <Field
-                className="form-control"
-                type="text"
-                name="last_name"
-                placeholder="Last Name"
-              />
-            </div>
-            <div className="form-row">
-              <label>
-                <Field type="radio" name="user_type" value="employee" />
-                Employee
-              </label>
-              <br />
-              <label>
-                <Field type="radio" name="user_type" value="admin" />
-                Admin
-              </label>
-            </div>
-            <div className="form-row">
-              {/* <Field
-                className="form-control"
-                type="text"
-                name="division"
-                placeholder="Division"
-              /> */}
-              <Select
-                fieldName={"Division"}
-                options={["A", "B", "C"]}
-                onChange={setSelectedDivision}
-              />
-            </div>
-            <div className="form-row">
-              <Field
-                className="form-control"
-                type="text"
-                name="district"
-                placeholder="District"
-              />
-            </div>
-            <button type="submit" disabled={isSubmitting}>
-              {!initialFormValues ? "Submit" : "Save"}
-            </button>
-          </Form>
-        )}
-      </Formik>
+      <div className="card-body">
+        <form onSubmit={formik.handleSubmit} className="form">
+          <div className="form-row">
+            <label htmlFor="first_name">First Name</label>
+            <input
+              id="first_name"
+              name="first_name"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.first_name}
+            />
+            {formik.touched.first_name && formik.errors.first_name ? (
+              <div>{formik.errors.first_name}</div>
+            ) : null}
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="last_name">Last Name</label>
+            <input
+              id="last_name"
+              name="last_name"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.last_name}
+            />
+            {formik.touched.last_name && formik.errors.last_name ? (
+              <div>{formik.errors.last_name}</div>
+            ) : null}
+          </div>
+
+          <div className="form-row">
+            <label htmlFor="user_type">User Type</label>
+            <input
+              name="user_type"
+              type="radio"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              checked={formik.values.user_type === "employee"}
+              value="employee"
+            />
+            <label>Employee</label>
+            <input
+              name="user_type"
+              type="radio"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              checked={formik.values.user_type === "admin"}
+              value="admin"
+            />
+            <lable>Admin</lable>
+            {formik.touched.user_type && formik.errors.user_type ? (
+              <div>{formik.errors.user_type}</div>
+            ) : null}
+          </div>
+          {formik.values.user_type === "employee" ? (
+            <>
+              <div className="form-row">
+                <label htmlFor="division">Divison</label>
+                <Select
+                  label={"Division"}
+                  name="division"
+                  options={[1, 2, 3]}
+                  formik={formik}
+                />
+                {formik.touched.division && formik.errors.division ? (
+                  <div>{formik.errors.division}</div>
+                ) : null}
+              </div>
+              <div className="form-row">
+                <label htmlFor="district">District</label>
+                <Select
+                  label={"District"}
+                  name="district"
+                  options={[1, 2, 3]}
+                  formik={formik}
+                />
+                {formik.touched.district && formik.errors.district ? (
+                  <div>{formik.errors.district}</div>
+                ) : null}
+              </div>
+            </>
+          ) : null}
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
-};
-
-export default UserDetailsForm;
+}

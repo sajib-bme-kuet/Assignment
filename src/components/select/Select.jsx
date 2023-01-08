@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./select.css";
 
-function Select({ fieldName, options, onChange }) {
+function Select({ name, label, options, formik }) {
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,13 +12,13 @@ function Select({ fieldName, options, onChange }) {
   function handleOptionClick(option) {
     setValue(option);
     setIsOpen(false);
-    onChange(option);
+    formik.setFieldValue(name, option);
   }
 
   return (
     <div className="select">
       <div className="selected" onClick={handleToggle}>
-        {value || `Select a ${fieldName}`}
+        {value || `Select a ${label}`}
       </div>
       {isOpen && (
         <ul className="options">
