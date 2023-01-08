@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 import { setAdminInformation } from "../../store/adminInformationSlice";
 import { setEmployeeInformation } from "../../store/employeeInformationSlice";
 
-export default function UserDetailsForm({ initialFormValues }) {
+export default function UserDetailsForm({ initialFormValues, setClose }) {
   const validationSchema = yup.object({
     first_name: yup
       .string("Please enter User's First Name")
@@ -62,10 +62,11 @@ export default function UserDetailsForm({ initialFormValues }) {
             )
             .then((response) => {
               response.data.user_type === "Employee"
-                ? setEmployeeInformation({ data: response.data })
-                : setAdminInformation({ data: response.data });
+                ? dispatch(setEmployeeInformation({ data: response.data }))
+                : dispatch(setAdminInformation({ data: response.data }));
 
               formik.resetForm();
+
               navigate("/");
             })
             .catch((err) => console.error(err))
@@ -79,6 +80,7 @@ export default function UserDetailsForm({ initialFormValues }) {
                 : setAdminInformation({ data: response.data });
 
               formik.resetForm();
+              setClose(!true);
               navigate("/");
             })
             .catch((err) => console.error(err));

@@ -70,7 +70,7 @@ const Users = () => {
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Add User">
-        <UserDetailsForm />
+        <UserDetailsForm setClose={setIsOpen} />
       </Modal>
       <Button onClick={() => setIsOpen(true)}>Add User</Button>
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab}>
