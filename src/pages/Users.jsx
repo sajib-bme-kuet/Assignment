@@ -7,14 +7,31 @@ import Tabs from "../components/tabs/Tabs";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { users } from "../routes/api";
+import { useDispatch, useSelector } from "react-redux";
 
+import { setEmployeeInformation } from "../store/employeeInformationSlice";
+import { setAdminInformation } from "../store/adminInformationSlice";
 const Users = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState();
+  const dispatch = useDispatch();
+
+  const employeeData = useSelector((state) => state.employeeInformation.data);
+  const adminData = useSelector((state) => state.adminInformation.data);
 
   useEffect(() => {
-    axios.get();
-  }, [activeTab]);
+    if (activeTab === "Employee" && employeeData?.length > 1) {
+      return;
+    } else if (activeTab === "Admin" && adminData?.length > 1) {
+      return;
+    }
+    axios.get(`${users}${activeTab?.toLowerCase()}`).then((response) => {
+      activeTab === "Employee"
+        ? dispatch(setEmployeeInformation({ data: response.data.flat() }))
+        : dispatch(setAdminInformation({ data: response.data.flat() }));
+    });
+  }, [activeTab, dispatch]);
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Add User">
@@ -32,7 +49,7 @@ const Users = () => {
               { label: "Division", fieldName: "division" },
               { label: "District", fieldName: "istrict" },
             ]}
-            rows={[{ id: 1, name: "Employee" }]}
+            rows={employeeData}
           />
         </Tab>
         <Tab label={"Admin"}>
@@ -43,7 +60,7 @@ const Users = () => {
               { label: "Last Name", fieldName: "last_name" },
               { label: "User Type", fieldName: "user_type" },
             ]}
-            rows={[{ id: 1, name: "Admin" }]}
+            rows={adminData}
           />
         </Tab>
       </Tabs>
