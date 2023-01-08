@@ -1,12 +1,19 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import "./userDetailsForm.css";
-import Select from "../select/Select";
-import { State, City } from "country-state-city";
 import axios from "axios";
-import { users } from "../../routes/api";
+import { City, State } from "country-state-city";
+import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import * as yup from "yup";
+import { manipulateUser } from "../../routes/api";
+import Select from "../select/Select";
+import "./userDetailsForm.css";
+
+import { useNavigate } from "react-router";
+import { setAdminInformation } from "../../store/adminInformationSlice";
+import { setEmployeeInformation } from "../../store/employeeInformationSlice";
+
 export default function UserDetailsForm({ initialFormValues }) {
   const validationSchema = yup.object({
     first_name: yup
@@ -22,6 +29,8 @@ export default function UserDetailsForm({ initialFormValues }) {
     district: yup.string("Please Choose User's District"),
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [districts, setDistricts] = useState([]);
   const [selectedDivision, setSelectedDivision] = useState();
   const [selectedDistrict, setSelectedDistrict] = useState();
@@ -44,7 +53,35 @@ export default function UserDetailsForm({ initialFormValues }) {
         division: selectedDivision?.name,
       };
 
-      // axios.post(users)
+      initialFormValues?.id
+        ? axios
+            .put(
+              `${manipulateUser}/${initialFormValues.id}`,
+              JSON.stringify(payload, null, 2),
+              { headers: { "Content-Type": "application/json" } }
+            )
+            .then((response) => {
+              response.data.user_type === "Employee"
+                ? setEmployeeInformation({ data: response.data })
+                : setAdminInformation({ data: response.data });
+
+              formik.resetForm();
+              navigate("/");
+            })
+            .catch((err) => console.error(err))
+        : axios
+            .post(manipulateUser, JSON.stringify(payload, null, 2), {
+              headers: { "Content-Type": "application/json" },
+            })
+            .then((response) => {
+              response.data.user_type === "Employee"
+                ? setEmployeeInformation({ data: response.data })
+                : setAdminInformation({ data: response.data });
+
+              formik.resetForm();
+              navigate("/");
+            })
+            .catch((err) => console.error(err));
     },
   });
 

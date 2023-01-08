@@ -4,19 +4,19 @@ export const employeeInformationSlice = createSlice({
   name: "employeeInformation",
   initialState: {
     data: [
-      {
-        id: "",
-        first_name: "",
-        last_name: "",
-        user_type: "employee",
-        division: "",
-        district: "",
-      },
+      // {
+      //   id: "",
+      //   first_name: "",
+      //   last_name: "",
+      //   user_type: "employee",
+      //   division: "",
+      //   district: "",
+      // },
     ],
   },
   reducers: {
     setEmployeeInformation: (state, action) => {
-      state.data = action.payload.data;
+      state.data = [...state.data, ...action.payload.data];
     },
   },
 });

@@ -4,17 +4,17 @@ export const adminInformationSlice = createSlice({
   name: "adminInformation",
   initialState: {
     data: [
-      {
-        id: "",
-        first_name: "",
-        last_name: "",
-        user_type: "admin",
-      },
+      // {
+      //   id: "",
+      //   first_name: "",
+      //   last_name: "",
+      //   user_type: "admin",
+      // },
     ],
   },
   reducers: {
     setAdminInformation: (state, action) => {
-      state.data = action.payload.data;
+      state.data = [...state.data, ...action.payload.data];
     },
   },
 });
