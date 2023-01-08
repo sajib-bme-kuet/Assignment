@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Button from "../components/button/Button";
-import { Helmet } from "react-helmet";
 import axios from "axios";
 import { manipulateUser } from "../routes/api";
 const UserDetails = () => {
