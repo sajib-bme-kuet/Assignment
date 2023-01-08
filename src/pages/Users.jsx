@@ -40,6 +40,17 @@ const Users = () => {
       </Modal>
       <Button onClick={() => setIsOpen(true)}>Add User</Button>
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab}>
+        <Tab label={"Admin"}>
+          <Table
+            columns={[
+              { label: "ID", fieldName: "id" },
+              { label: "First Name", fieldName: "first_name" },
+              { label: "Last Name", fieldName: "last_name" },
+              { label: "User Type", fieldName: "user_type" },
+            ]}
+            rows={adminData}
+          />
+        </Tab>
         <Tab label={"Employee"}>
           <Table
             columns={[
@@ -51,17 +62,6 @@ const Users = () => {
               { label: "District", fieldName: "district" },
             ]}
             rows={employeeData}
-          />
-        </Tab>
-        <Tab label={"Admin"}>
-          <Table
-            columns={[
-              { label: "ID", fieldName: "id" },
-              { label: "First Name", fieldName: "first_name" },
-              { label: "Last Name", fieldName: "last_name" },
-              { label: "User Type", fieldName: "user_type" },
-            ]}
-            rows={adminData}
           />
         </Tab>
       </Tabs>
