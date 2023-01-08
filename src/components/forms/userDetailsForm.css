@@ -17,6 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 16px;
+  padding-left: 1rem;
 }
 
 .form-control {
@@ -42,4 +43,9 @@ button[type="submit"]:disabled {
   background-color: #ccc;
   color: #fff;
   cursor: not-allowed;
+}
+
+.textField {
+  padding: 0.5rem;
+  margin-left: 1rem;
 }

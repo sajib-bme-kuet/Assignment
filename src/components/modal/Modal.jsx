@@ -14,7 +14,7 @@ const Modal = ({ open, onClose, title, children }) => {
           <p className="closeBtn" onClick={onClose}>
             X
           </p>
-          <h2 className="modalTitle">{title}</h2>
+          <h1 className="modalTitle">{title}</h1>
           <div className="content">{children}</div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 .select {
   position: relative;
+  width: 80%;
+  padding-left: 0.1rem;
 }
 
 .select .selected {
@@ -20,7 +22,7 @@
   overflow-y: auto;
   list-style: none;
   margin: 0;
-  padding: 8px 0;
+  padding: 2rem 0;
   background-color: #fff;
   border: 1px solid #ddd;
   border-top: 0;

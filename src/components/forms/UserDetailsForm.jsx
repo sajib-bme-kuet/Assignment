@@ -66,7 +66,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
                 : dispatch(setAdminInformation({ data: response.data }));
 
               formik.resetForm();
-
+              alert("Updated Successfully!");
               navigate("/");
             })
             .catch((err) => console.error(err))
@@ -81,6 +81,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
 
               formik.resetForm();
               setClose(!true);
+              alert("Saved Successfully!");
               navigate("/");
             })
             .catch((err) => console.error(err));
@@ -113,6 +114,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
         <form onSubmit={formik.handleSubmit} className="form">
           <div className="form-row">
             <label htmlFor="first_name">First Name</label>
+
             <input
               id="first_name"
               name="first_name"
@@ -120,6 +122,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.first_name}
+              className="textField"
             />
             {formik.touched.first_name && formik.errors.first_name ? (
               <div>{formik.errors.first_name}</div>
@@ -128,6 +131,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
 
           <div className="form-row">
             <label htmlFor="last_name">Last Name</label>
+            <br></br>
             <input
               id="last_name"
               name="last_name"
@@ -135,6 +139,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.last_name}
+              className="textField"
             />
             {formik.touched.last_name && formik.errors.last_name ? (
               <div>{formik.errors.last_name}</div>
@@ -143,6 +148,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
 
           <div className="form-row">
             <label htmlFor="user_type">User Type</label>
+            <br></br>
             <input
               name="user_type"
               type="radio"
@@ -150,6 +156,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
               onBlur={formik.handleBlur}
               checked={formik.values.user_type === "Employee"}
               value="Employee"
+              className="textField"
             />
             <label>Employee</label>
             <input
@@ -159,8 +166,9 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
               onBlur={formik.handleBlur}
               checked={formik.values.user_type === "Admin"}
               value="Admin"
+              className="textField"
             />
-            <lable>Admin</lable>
+            <label>Admin</label>
             {formik.touched.user_type && formik.errors.user_type ? (
               <div>{formik.errors.user_type}</div>
             ) : null}
@@ -169,6 +177,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
             <>
               <div className="form-row">
                 <label htmlFor="division">Divison</label>
+                <br></br>
                 <Select
                   label={"Division"}
                   name="division"
@@ -182,6 +191,7 @@ export default function UserDetailsForm({ initialFormValues, setClose }) {
               </div>
               <div className="form-row">
                 <label htmlFor="district">District</label>
+                <br></br>
                 <Select
                   label={"District"}
                   name="district"
