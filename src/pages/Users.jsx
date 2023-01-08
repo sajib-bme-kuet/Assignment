@@ -4,7 +4,7 @@ import Tab from "../components/tab/Tab";
 import Tabs from "../components/tabs/Tabs";
 
 import { useState } from "react";
-import UserAddForm from "../components/forms/UserAddForm";
+import UserDetailsForm from "../components/forms/UserDetailsForm";
 import Table from "../components/table/Table";
 
 const Users = () => {
@@ -13,7 +13,7 @@ const Users = () => {
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Add User">
-        <UserAddForm />
+        <UserDetailsForm />
       </Modal>
       <Button onClick={() => setIsOpen(true)}>Add User</Button>
       <Tabs>

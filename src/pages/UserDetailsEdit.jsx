@@ -1,7 +1,12 @@
 import React from "react";
+import UserDetailsForm from "../components/forms/UserDetailsForm";
 
 const UserDetailsEdit = () => {
-  return <div>UserDetailsEdit</div>;
+  return (
+    <div>
+      <UserDetailsForm />
+    </div>
+  );
 };
 
 export default UserDetailsEdit;
