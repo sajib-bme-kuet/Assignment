@@ -1,12 +1,17 @@
-.autocomplete {
+.select {
   position: relative;
 }
 
-.autocomplete .form-control {
-  padding-right: 32px;
+.select .selected {
+  display: block;
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.autocomplete .options {
+.select .options {
   position: absolute;
   top: 100%;
   left: 0;
@@ -22,12 +27,12 @@
   z-index: 1;
 }
 
-.autocomplete .option {
+.select .option {
   display: block;
   padding: 8px 16px;
   cursor: pointer;
 }
 
-.autocomplete .option:hover {
+.select .option:hover {
   background-color: #f5f5f5;
 }

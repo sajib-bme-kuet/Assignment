@@ -1,7 +1,8 @@
 import { Field, Form, Formik } from "formik";
+import { useState } from "react";
 import * as yup from "yup";
+import Select from "../select/Select";
 import "./userDetailsForm.css";
-
 const UserDetailsForm = ({ initialFormValues }) => {
   const validationSchema = yup.object({
     first_name: yup
@@ -16,6 +17,8 @@ const UserDetailsForm = ({ initialFormValues }) => {
     division: yup.string("Please Choose User's division"),
     district: yup.string("Please Choose User's District"),
   });
+
+  const [selectedDivision, setSelectedDivision] = useState();
 
   return (
     <div className="card">
@@ -33,7 +36,9 @@ const UserDetailsForm = ({ initialFormValues }) => {
         }
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
+          let payload = { ...values };
+          payload = { ...payload, division: selectedDivision };
+          alert(JSON.stringify(payload, null, 2));
         }}
       >
         {({ isSubmitting }) => (
@@ -64,11 +69,16 @@ const UserDetailsForm = ({ initialFormValues }) => {
               </label>
             </div>
             <div className="form-row">
-              <Field
+              {/* <Field
                 className="form-control"
                 type="text"
                 name="division"
                 placeholder="Division"
+              /> */}
+              <Select
+                fieldName={"Division"}
+                options={["A", "B", "C"]}
+                onChange={setSelectedDivision}
               />
             </div>
             <div className="form-row">
