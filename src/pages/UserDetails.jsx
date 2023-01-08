@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Button from "../components/button/Button";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { manipulateUser } from "../routes/api";
 const UserDetails = () => {
   const navigate = useNavigate();
   const { user_type, id } = useParams();
-  const userData = useSelector((state) => state.userDetails.data);
+  const [userData, setUserData] = useState();
+  const data = useSelector((state) => state.userDetails.data);
+  useEffect(() => {
+    if (!data.id && id) {
+      axios
+        .get(`${manipulateUser}/${id}`)
+        .then((response) => setUserData(response.data));
+    }
+    setUserData(data);
+  }, [data, id]);
   return (
     <div>
-      <Helmet>
+      {/* <Helmet>
         <title>Details of {userData?.first_name}</title>
         <meta
           property="og:title"
@@ -20,7 +31,7 @@ const UserDetails = () => {
           content={"https://api.unsplash.com/search/photos?page=1&query=man"}
         />
         <meta property="og:description" content={"Test"} />
-      </Helmet>
+      </Helmet> */}
       <h5>Details of {user_type}:</h5>
       <table>
         <tr>
