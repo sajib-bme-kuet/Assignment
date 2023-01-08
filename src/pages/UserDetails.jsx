@@ -40,6 +40,15 @@ const UserDetails = () => {
         Edit
       </Button>
       <div>Share via</div>
+      <div>
+        <button>
+          <a
+            href={`https://www.facebook.com/sharer.php?u=${window.location.href}`}
+          >
+            Facebook
+          </a>
+        </button>
+      </div>
     </div>
   );
 };
