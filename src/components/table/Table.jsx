@@ -3,7 +3,13 @@ import "./table.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../store/userDetailsSlice";
-const Table = ({ columns, rows }) => {
+const Table = ({
+  columns,
+  rows,
+  currentPage,
+  handleNextPage,
+  handlePrevPage,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -33,6 +39,10 @@ const Table = ({ columns, rows }) => {
           </tr>
         );
       })}
+
+      <button onClick={handlePrevPage}> Prev </button>
+      {currentPage}
+      <button onClick={handleNextPage}> Next </button>
     </table>
   );
 };
