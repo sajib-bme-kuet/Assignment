@@ -16,3 +16,13 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.pagination {
+  margin: 2rem;
+}
+
+.paginationBtn {
+  background-color: antiquewhite;
+  padding: 0.25rem;
+  margin: 1rem;
+}

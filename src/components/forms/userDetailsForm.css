@@ -49,3 +49,7 @@ button[type="submit"]:disabled {
   padding: 0.5rem;
   margin-left: 1rem;
 }
+
+.gridParent {
+  display: grid;
+}

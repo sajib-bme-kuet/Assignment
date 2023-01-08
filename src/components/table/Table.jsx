@@ -40,9 +40,15 @@ const Table = ({
         );
       })}
 
-      <button onClick={handlePrevPage}> Prev </button>
-      {currentPage}
-      <button onClick={handleNextPage}> Next </button>
+      <div className="pagination">
+        <button className="paginationBtn" onClick={handlePrevPage}>
+          Prev
+        </button>
+        {currentPage}
+        <button className="paginationBtn" onClick={handleNextPage}>
+          Next
+        </button>
+      </div>
     </table>
   );
 };

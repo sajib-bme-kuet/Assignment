@@ -51,15 +51,15 @@ const UserDetails = () => {
       </Button>
       <div>Share via</div>
       <div>
-        <button>
+        <Button onClick={() => {}} color="#11aaff" type={"button"}>
           <a
             href={`https://www.facebook.com/sharer.php?u=pocoegg.com`}
             // href={`https://www.facebook.com/sharer.php?u=${window.location.href}`}
           >
             Facebook
           </a>
-        </button>
-        <button>
+        </Button>
+        <Button onClick={() => {}} color="#11aaff" type={"button"}>
           <a
             href={`https://twitter.com/share?url=pocoegg.com&text=${userData?.first_name}`}
             // href={`https://www.facebook.com/sharer.php?u=${window.location.href}`}
@@ -68,7 +68,7 @@ const UserDetails = () => {
           >
             Twitter
           </a>
-        </button>
+        </Button>
       </div>
     </div>
   );

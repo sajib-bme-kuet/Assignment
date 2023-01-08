@@ -1,3 +1,4 @@
+import "./tabs.css";
 const Tabs = ({ activeTab, setActiveTab, children }) => {
   // const [activeTab, setActiveTab] = useState(children[0].props.label);
 
@@ -7,6 +8,7 @@ const Tabs = ({ activeTab, setActiveTab, children }) => {
       <div>
         {children.map((child) => (
           <button
+            className={`tabBtn tabBtn-${activeTab === child.props.label}`}
             key={child.props.label}
             onClick={() => setActiveTab(child.props.label)}
           >

@@ -15,3 +15,17 @@
 .tabs:not(:last-child) {
   border-right: 1px solid rgba(0, 0, 0, 0.274);
 }
+
+.tabBtn {
+  padding: 1rem;
+  background-color: whitesmoke;
+  outline: none;
+  border: 0px transparent;
+  font-weight: 600;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.tabBtn-true {
+  color: red;
+}
