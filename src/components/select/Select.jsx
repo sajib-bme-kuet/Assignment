@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./select.css";
 
-function Select({ name, label, options, formik }) {
-  const [value, setValue] = useState(formik.values[name]);
+function Select({ name, label, options, initialValue, onChange }) {
+  const [value, setValue] = useState(initialValue);
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {
@@ -10,25 +10,25 @@ function Select({ name, label, options, formik }) {
   }
 
   function handleOptionClick(option) {
-    setValue(option);
+    setValue(option?.name);
     setIsOpen(false);
-    formik.setFieldValue(name, option);
+    onChange(option);
   }
 
   return (
     <div className="select">
       <div className="selected" onClick={handleToggle}>
-        {value || `Select a ${label}`}
+        {!value ? `Select a ${label}` : value}
       </div>
       {isOpen && (
         <ul className="options">
-          {options.map((option) => (
+          {options.map((option, index) => (
             <li
-              key={option}
+              key={index}
               className="option"
               onClick={() => handleOptionClick(option)}
             >
-              {option}
+              {option?.name}
             </li>
           ))}
         </ul>

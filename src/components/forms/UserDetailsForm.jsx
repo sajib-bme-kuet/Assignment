@@ -1,9 +1,12 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./userDetailsForm.css";
 import Select from "../select/Select";
 import { State, City } from "country-state-city";
+import axios from "axios";
+import { users } from "../../routes/api";
 export default function UserDetailsForm({ initialFormValues }) {
   const validationSchema = yup.object({
     first_name: yup
@@ -19,6 +22,9 @@ export default function UserDetailsForm({ initialFormValues }) {
     district: yup.string("Please Choose User's District"),
   });
 
+  const [districts, setDistricts] = useState([]);
+  const [selectedDivision, setSelectedDivision] = useState();
+  const [selectedDistrict, setSelectedDistrict] = useState();
   const formik = useFormik({
     initialValues: initialFormValues
       ? initialFormValues
@@ -31,9 +37,36 @@ export default function UserDetailsForm({ initialFormValues }) {
         },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      let payload = { ...values };
+      payload = {
+        ...payload,
+        district: selectedDistrict?.name,
+        division: selectedDivision?.name,
+      };
+
+      // axios.post(users)
     },
   });
+
+  const divisionNames = State.getStatesOfCountry("BD")
+    .filter((state) => state.name.includes("Division"))
+    .map((state) => state.name.split(" Division")[0]);
+
+  const divisions = State.getStatesOfCountry("BD")
+    .filter((state) => divisionNames.includes(state.name.split(" ")[0]))
+    .filter((division) => !division.name.includes("Division"));
+
+  useEffect(() => {
+    if (!selectedDivision) {
+      return;
+    }
+    setDistricts(
+      City.getCitiesOfState(
+        selectedDivision?.countryCode,
+        selectedDivision?.isoCode
+      )
+    );
+  }, [selectedDivision]);
 
   return (
     <div className="card">
@@ -100,8 +133,9 @@ export default function UserDetailsForm({ initialFormValues }) {
                 <Select
                   label={"Division"}
                   name="division"
-                  options={[1, 2, 3]}
-                  formik={formik}
+                  options={divisions}
+                  onChange={setSelectedDivision}
+                  initialValue={formik.values?.division}
                 />
                 {formik.touched.division && formik.errors.division ? (
                   <div>{formik.errors.division}</div>
@@ -112,8 +146,9 @@ export default function UserDetailsForm({ initialFormValues }) {
                 <Select
                   label={"District"}
                   name="district"
-                  options={[1, 2, 3]}
-                  formik={formik}
+                  options={districts}
+                  onChange={setSelectedDistrict}
+                  initialValue={formik.values?.district}
                 />
                 {formik.touched.district && formik.errors.district ? (
                   <div>{formik.errors.district}</div>

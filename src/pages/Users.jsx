@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Button from "../components/button/Button";
 import UserDetailsForm from "../components/forms/UserDetailsForm";
 import Modal from "../components/modal/Modal";
@@ -47,7 +48,7 @@ const Users = () => {
               { label: "Last Name", fieldName: "last_name" },
               { label: "User Type", fieldName: "user_type" },
               { label: "Division", fieldName: "division" },
-              { label: "District", fieldName: "istrict" },
+              { label: "District", fieldName: "district" },
             ]}
             rows={employeeData}
           />
